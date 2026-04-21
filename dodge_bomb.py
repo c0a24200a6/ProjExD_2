@@ -4,13 +4,13 @@ import random
 import pygame as pg
 import time
 
-
-WIDTH, HEIGHT = 1100, 650
+WIDTH, HEIGHT = 1100, 650 # 画面の幅と高さ
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 DELTA = {pg.K_UP: (0, -5), pg.K_DOWN: (0, 5), pg.K_LEFT: (-5, 0), pg.K_RIGHT: (5, 0)}
+# こうかとんの移動量と画像の向きの対応辞書
 
-def check_bound(rct, scr_rct):
+def check_bound(rct, scr_rct): #画面外に出ないようにする関数
     """
     [1] rct: こうかとん or 爆弾のRect
     [2] scr_rct: スクリーンのRect
@@ -23,7 +23,7 @@ def check_bound(rct, scr_rct):
         tate = -1
     return yoko, tate
 
-def gameover(screen: pg.Surface) -> None:
+def gameover(screen: pg.Surface) -> None: # ゲームオーバーの関数
     
     overlay = pg.Surface((WIDTH, HEIGHT))
     overlay.fill((0, 0, 0))
@@ -50,7 +50,7 @@ def gameover(screen: pg.Surface) -> None:
 
     #pg.time.wait(5000)
 
-def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
+def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]: # 爆弾の画像と加速度の関数
     bb_imgs = []
     bb_accs = [a for a in range(1, 11)]
     for r in range(1, 11):
@@ -61,7 +61,7 @@ def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
         bb_accs.append(random.randint(1, 10))
     return bb_imgs, bb_accs
 
-def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
+def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]: # こうかとんの画像の向き関数
     img = pg.image.load("fig/3.png")
     img_r = pg.transform.flip(img, True, False)
 
@@ -78,8 +78,7 @@ def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
     }
     return kk_dict
 
-
-def calc_orientation(org: pg.Rect, dst: pg.Rect, current_xy: tuple[float, float]) -> tuple[float, float]:
+def calc_orientation(org: pg.Rect, dst: pg.Rect, current_xy: tuple[float, float]) -> tuple[float, float]: #追尾爆弾の関数
     dx = dst.centerx - org.centerx
     dy = dst.centery - org.centery
 
