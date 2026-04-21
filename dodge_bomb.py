@@ -75,6 +75,11 @@ def main():
             bb_vy *= -1
         screen.blit(bb_img, bb_rct)
 
+        colliderect = kk_rct.colliderect(bb_rct)
+        if colliderect:
+            print("GAME OVER")
+            return
+
         pg.display.update()
         tmr += 1
         clock.tick(50)
