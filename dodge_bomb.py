@@ -78,7 +78,7 @@ def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
     }
     return kk_dict
 
-"""
+
 def calc_orientation(org: pg.Rect, dst: pg.Rect, current_xy: tuple[float, float]) -> tuple[float, float]:
     dx = dst.centerx - org.centerx
     dy = dst.centery - org.centery
@@ -94,12 +94,12 @@ def calc_orientation(org: pg.Rect, dst: pg.Rect, current_xy: tuple[float, float]
     norm_dx = dx / distance
     norm_dy = dy / distance
 
-    speed = (50) ** 0.5  # √50 ≒ 7.07
+    speed = (50) ** 0.5
     vx = norm_dx * speed
     vy = norm_dy * speed
 
     return vx, vy
-"""
+
 
 
 def main():
@@ -180,7 +180,9 @@ def main():
             print("GAME OVER")
             return
         
-        #calc_orientation(kk_rct, bb_rct, kk_rct.center)
+        bb_vx, bb_vy = calc_orientation(bb_rct, kk_rct, (bb_vx, bb_vy))
+        bb_rct.move_ip(bb_vx, bb_vy)
+
 
         pg.display.update()
         tmr += 1
